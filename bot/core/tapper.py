@@ -432,6 +432,9 @@ class Tapper:
         if not self.wallet_connected and settings.ENABLE_CHECKER:
             tasks_to_do.append('wallet')
 
+        if settings.ENABLE_AUTO_CLAIM_WALLET_TASK:
+            tasks_to_do.append('wallet')
+
         for retry_count in range(settings.MAX_RETRIES):
             try:
                 if self.scraper_mode and self.scraper:

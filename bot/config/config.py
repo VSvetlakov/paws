@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     SLEEP_TIME_IN_MINUTES: list[int] = [60 * 24, 60 * 24]
 
     ENABLE_AUTO_TASKS: bool = True
+    ENABLE_AUTO_CLAIM_WALLET_TASK: bool = True
     UNSAFE_ENABLE_JOIN_TG_CHANNELS: bool = False # NOT RECOMMENDED
     MUTE_AND_ARCHIVE_TG_CHANNELS: bool = False
 
