@@ -426,6 +426,7 @@ class Tapper:
             'emojiname',
             'linked',
             'daily',
+            'custom',
         ]
 
         if not self.wallet_connected and settings.ENABLE_CHECKER:
@@ -496,7 +497,7 @@ class Tapper:
                      return False
 
                  self.info(f"Detected Telegram channel subscription task <cyan>{task_title}</cyan>")
-                 success = await self.join_telegram_channel(task_data, task_code)
+                 success = await self.join_telegram_channel(task_data, task_code, task)
                  if not success:
                      self.error(f"Failed to subscribe to channel <cyan>{task_title}</cyan>")
                      return False
@@ -617,7 +618,7 @@ class Tapper:
 
         return False
 
-    async def join_telegram_channel(self, channel_url: str, task_code: str) -> bool:
+    async def join_telegram_channel(self, channel_url: str, task_code: str, task: dict) -> bool:
         if not settings.UNSAFE_ENABLE_JOIN_TG_CHANNELS:
             return False
 
@@ -626,6 +627,12 @@ class Tapper:
         try:
             if task_code == 'blum':
                 channel_username = 'blumcrypto'
+            elif re.search("tomarket", task.get('title', '').lower()):
+                channel_username = 'tomarket_ai'
+            elif re.search("empire", task.get('title', '').lower()):
+                channel_username = 'empirex'
+            elif re.search("cats", task.get('title', '').lower()):
+                channel_username = 'Cats_housewtf'
             else:
                 channel_username = channel_url.split('/')[-1].strip()
 
@@ -742,7 +749,6 @@ class Tapper:
             if status == 201 and success:
                 return True
             else:
-                print(res.text)
                 return False
         except Exception as e:
             self.error(f"Unknown error while trying to connect wallet: {e}")
