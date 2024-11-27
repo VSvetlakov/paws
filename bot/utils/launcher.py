@@ -104,8 +104,8 @@ async def process() -> None:
 
             check_array = ["1", "2", "3"]
 
-            if settings.ENABLE_CHECKER:
-                check_array = ["1", "2", "3", "4"]
+#             if settings.ENABLE_CHECKER:
+#                 check_array = ["1", "2", "3", "4"]
 
             if not action.isdigit():
                 logger.warning("Action must be number")
@@ -130,7 +130,7 @@ async def process() -> None:
         logger.success('Statistics successfully generated ✅')
         await generate_statistics_html_page()
 
-    elif action == 4 and settings.ENABLE_CHECKER:
+    elif action == 4 and settings.ENABLE_CHECKER and False:
          while True:
              count = input("Input number of wallet you want to create: ")
              try:

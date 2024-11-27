@@ -427,12 +427,13 @@ class Tapper:
             'linked',
             'daily',
             'custom',
+            'voteup',
         ]
 
         if not self.wallet_connected and settings.ENABLE_CHECKER:
             tasks_to_do.append('wallet')
 
-        if settings.ENABLE_AUTO_CLAIM_WALLET_TASK:
+        if self.wallet_connected and settings.ENABLE_AUTO_CLAIM_WALLET_TASK:
             tasks_to_do.append('wallet')
 
         for retry_count in range(settings.MAX_RETRIES):
@@ -494,7 +495,7 @@ class Tapper:
         task_code = task.get('code', '')
         available_until = task.get('availableUntil', '')
 
-        if task_type == 'social' and task_action == 'link':
+        if (task_type == 'social' or task_type == 'partner-channel') and task_action == 'link':
              if 't.me/' in task_data:
                  if not settings.UNSAFE_ENABLE_JOIN_TG_CHANNELS:
                      return False
@@ -636,6 +637,10 @@ class Tapper:
                 channel_username = 'empirex'
             elif re.search("cats", task.get('title', '').lower()):
                 channel_username = 'Cats_housewtf'
+            elif re.search("bums", task.get('title', '').lower()):
+                channel_username = 'bums_official'
+            elif re.search("duckchain", task.get('title', '').lower()):
+                channel_username = 'DuckChainAnn'
             else:
                 channel_username = channel_url.split('/')[-1].strip()
 
