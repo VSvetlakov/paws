@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     UNSAFE_ENABLE_JOIN_TG_CHANNELS: bool = False # NOT RECOMMENDED
     MUTE_AND_ARCHIVE_TG_CHANNELS: bool = False
 
+    ENABLE_CHECK_SERVER_AVAILABILITY: bool = True
+
     DISABLE_IN_NIGHT: bool = False
     NIGHT_TIME: list[int] = [23, 6]
 

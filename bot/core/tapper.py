@@ -841,7 +841,7 @@ class Tapper:
 
         while True:
             try:
-                if not await self.check_server_availability(http_client=http_client):
+                if settings.ENABLE_CHECK_SERVER_AVAILABILITY == True and not await self.check_server_availability(http_client=http_client):
                     self.warning(f"<magenta>Paws</magenta> server is not available. Sleep 30 minutes.. 💤")
                     await asyncio.sleep(delay=60 * 30)
 
